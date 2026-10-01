@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kingdom Glory Services LLC - Digital Business Card</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- QRCode.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    body {
+      background-color: #0b0f17;
+      color: #f3f4f6;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .gold-gradient-bg {
+      background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
+    }
+    .card-bg {
+      background: linear-gradient(145deg, #161c28, #0f131c);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+    }
+    /* Filter to invert the black logo to crisp white for the dark mobile UI */
+    .logo-white {
+      filter: brightness(0) invert(1);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-between p-4 sm:p-6">
+
+  <main class="w-full max-w-md mx-auto space-y-6 pt-2">
+
+    <!-- HEADER / EXACT LOGO -->
+    <header class="text-center">
+      <div class="w-full max-w-[280px] mx-auto mb-2">
+        <!-- Exact Logo Image (Inverted to White for Dark Background) -->
+        <img src="88.jpg" alt="Kingdom Glory Services LLC" class="w-full h-auto logo-white object-contain mx-auto" onerror="this.onerror=null; this.src='https://g.page/r/CW8RkGtIEZbJEBM/review';"/>
+      </div>
+    </header>
+
+    <!-- PRIMARY ACTION: GOOGLE REVIEW -->
+    <section class="card-bg border border-amber-500/30 rounded-2xl p-5 text-center relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-1 gold-gradient-bg"></div>
+      
+      <h2 class="text-lg font-bold text-white mb-1 flex items-center justify-center gap-2">
+        <i class="fa-solid fa-star text-amber-400"></i> Leave Us A 5-Star Review
+      </h2>
+      <p class="text-xs text-gray-400 mb-4">Your feedback helps Kingdom Glory Services grow!</p>
+
+      <!-- Interactive QR Code -->
+      <div class="bg-white p-3 rounded-xl inline-block shadow-inner cursor-pointer relative group" id="qrContainer" onclick="openQrModal()">
+        <div id="qrcode" class="flex justify-center items-center"></div>
+        <div class="text-[10px] text-gray-600 font-semibold mt-2 tracking-wider">TAP TO ENLARGE</div>
+      </div>
+
+      <div class="mt-4">
+        <a href="https://g.page/r/CW8RkGtIEZbJEBM/review" target="_blank" rel="noopener noreferrer" class="gold-gradient-bg text-slate-950 font-bold py-3 px-6 rounded-xl block text-sm shadow-lg hover:brightness-110 transition duration-200">
+          <i class="fa-brands fa-google mr-2"></i> Open Google Review Page
+        </a>
+      </div>
+    </section>
+
+    <!-- DIRECT CONTACT BUTTONS -->
+    <section class="grid grid-cols-2 gap-3">
+      <a href="tel:7276550467" class="bg-slate-800/80 border border-slate-700/80 p-3 rounded-xl flex items-center justify-center gap-2 text-white font-semibold text-sm hover:bg-slate-700 transition">
+        <i class="fa-solid fa-phone text-amber-400"></i> Call Us
+      </a>
+      <a href="sms:7276550467" class="bg-slate-800/80 border border-slate-700/80 p-3 rounded-xl flex items-center justify-center gap-2 text-white font-semibold text-sm hover:bg-slate-700 transition">
+        <i class="fa-solid fa-comment-dots text-amber-400"></i> Text Us
+      </a>
+    </section>
+
+    <!-- SAVE CONTACT VCF -->
+    <button onclick="downloadVCard()" class="w-full bg-slate-800/80 border border-slate-700/80 p-3 rounded-xl flex items-center justify-center gap-2 text-gray-200 font-semibold text-sm hover:bg-slate-700 transition">
+      <i class="fa-solid fa-address-card text-amber-400"></i> Save Contact to Phone
+    </button>
+
+    <!-- PHYSICAL BUSINESS CARD PREVIEW -->
+    <section class="space-y-2">
+      <div class="text-xs text-gray-400 text-center font-medium">Card Layout Preview</div>
+      <div class="bg-white text-black p-6 rounded-xl shadow-2xl border border-gray-300 aspect-[1.75/1] flex items-center justify-between gap-4">
+        
+        <!-- Left Side: Exact Logo & Phone Number -->
+        <div class="flex-1 flex flex-col items-center justify-center text-center pr-2 border-r border-gray-200">
+          <img src="88.jpg" alt="Kingdom Glory Services" class="w-full max-w-[140px] h-auto object-contain mb-3" />
+          <div class="text-xs font-bold tracking-tight text-gray-900 border-t border-b border-gray-900 py-1 px-2">
+            727 655 0467
+          </div>
+        </div>
+
+        <!-- Right Side: Exact Review QR Code -->
+        <div class="flex-1 flex flex-col items-center justify-center text-center pl-2">
+          <div id="cardPreviewQr" class="bg-white p-1"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="text-center text-[11px] text-gray-500 py-4">
+    Kingdom Glory Services LLC &bull; (727) 655-0467
+  </footer>
+
+  <!-- FULLSCREEN QR MODAL -->
+  <div id="qrModal" class="fixed inset-0 bg-black/90 hidden flex-col items-center justify-center z-50 p-6" onclick="closeQrModal()">
+    <div class="bg-white p-6 rounded-2xl text-center max-w-xs w-full shadow-2xl" onclick="event.stopPropagation()">
+      <h3 class="text-slate-900 font-bold mb-1 text-base">Scan For Google Review</h3>
+      <p class="text-xs text-gray-500 mb-4">Kingdom Glory Services LLC</p>
+      <div id="modalQr" class="flex justify-center mb-4"></div>
+      <button onclick="closeQrModal()" class="w-full bg-slate-900 text-white font-semibold py-2 rounded-xl text-sm">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const reviewUrl = "https://g.page/r/CW8RkGtIEZbJEBM/review";
+
+    // Generate main QR
+    new QRCode(document.getElementById("qrcode"), {
+      text: reviewUrl,
+      width: 130,
+      height: 130,
+      colorDark : "#000000",
+      colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.H
+    });
+
+    // Generate preview card QR
+    new QRCode(document.getElementById("cardPreviewQr"), {
+      text: reviewUrl,
+      width: 110,
+      height: 110,
+      colorDark : "#000000",
+      colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.H
+    });
+
+    // Generate modal QR
+    new QRCode(document.getElementById("modalQr"), {
+      text: reviewUrl,
+      width: 200,
+      height: 200,
+      colorDark : "#000000",
+      colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.H
+    });
+
+    function openQrModal() {
+      document.getElementById("qrModal").classList.remove("hidden");
+      document.getElementById("qrModal").classList.add("flex");
+    }
+
+    function closeQrModal() {
+      document.getElementById("qrModal").classList.add("hidden");
+      document.getElementById("qrModal").classList.remove("flex");
+    }
+
+    function downloadVCard() {
+      const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:Kingdom Glory Services LLC
+ORG:Kingdom Glory Services LLC
+TEL;TYPE=CELL,VOICE:7276550467
+URL:https://g.page/r/CW8RkGtIEZbJEBM/review
+NOTE:Specialized Electromechanical & Heater Repairs. Scan to leave a 5-Star Google Review.
+END:VCARD`;
+
+      const blob = new Blob([vcard], { type: 'text/vcard' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.setAttribute('href', url);
+      a.setAttribute('download', 'Kingdom_Glory_Services.vcf');
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  </script>
+</body>
+  </html>
